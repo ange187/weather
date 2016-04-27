@@ -8,7 +8,7 @@ Class Weather {
 		$conf = Config::get('weather');
 		$id =  $conf['city_id'];
 		$forecast = Weather::getData($id);
-		$src = 'weather/weather.html';
+		$src = '-weather/weather.html';
 		$html = Template::parse($src, $forecast);
 		return $html;
 	}
