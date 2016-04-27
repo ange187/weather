@@ -1,0 +1,12 @@
+{
+	"name": "angelcharly/weather",
+	"homepage":"https://github.com/ange187/weather",
+	"license": "GPL3",
+	"require": {
+		"infrajs/template":"~1",
+		"infrajs/config":"~1"
+	},
+	"autoload": {
+		"psr-4": { "angelcharly\\weather\\": "" }
+	}
+}
