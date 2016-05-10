@@ -4,7 +4,8 @@
 	"license": "GPL3",
 	"require": {
 		"infrajs/template":"~1",
-		"infrajs/config":"~1"
+		"infrajs/config":"~1",
+		"infrajs/config-search":"~1"
 	},
 	"autoload": {
 		"psr-4": { "angelcharly\\weather\\": "" }

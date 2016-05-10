@@ -5,6 +5,7 @@ use infrajs\template\Template;
 Class Weather {
 	public static function getHtml()
 	{
+		\infrajs\config\search\Search::init();
 		$conf = Config::get('weather');
 		$id =  $conf['city_id'];
 		$forecast = Weather::getData($id);

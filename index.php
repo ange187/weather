@@ -1,5 +1,9 @@
 <?php
-require_once('weather/Weather.php');
+
+if (!is_file('vendor/autoload.php')) {
+	chdir('../../../');
+	require_once('vendor/autoload.php');
+}
 
 $html = angelcharly\weather\Weather::getHtml();
 
