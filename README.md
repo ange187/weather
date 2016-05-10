@@ -19,7 +19,8 @@
 ```json
 {
 	"weather":{
-		"city_id":36079
+		"city_id":36079,
+		"count":6
 	}
 }
 ```
