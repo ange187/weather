@@ -1,15 +1,23 @@
 <?php
 namespace angelcharly\weather;
-use infrajs\config\Config;
 use infrajs\template\Template;
+use infrajs\path\Path;
+use infrajs\router\Router;
 Class Weather {
+	public static $conf = array(
+		'city_id' => 27890,
+		'count' => 5
+	);
 	public static function getHtml()
 	{
-		\infrajs\config\search\Search::init();
-		$conf = Config::get('weather');
-		$id =  $conf['city_id'];
+		Router::init();
+		$conf = Weather::$conf;
+		$id = $conf['city_id'];
 		$forecast = Weather::getData($id);
 		$src = '-weather/weather.html';
+		if (!Path::theme($src)) {
+			throw new \Exception('Не найден шаблон '.$src);
+		}
 		$html = Template::parse($src, $forecast);
 		return $html;
 	}
@@ -19,7 +27,7 @@ Class Weather {
 		$data_file = 'http://export.yandex.ru/weather-ng/forecasts/'.$city_id.'.xml'; // адрес xml файла 
 		$count = 0;
 
-		$conf = Config::get('weather');  
+		$conf = Weather::$conf;
 		$stop_count = $conf['count'];
 		
 		do {

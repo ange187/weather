@@ -24,6 +24,6 @@
 	}
 }
 ```
-Код города citi_id можно посмотреть [тут](https://pogoda.yandex.ru/static/cities.xml)
+Код города city_id можно посмотреть [тут](https://pogoda.yandex.ru/static/cities.xml)
 ## Требование
 Требуется php от 5.4. Требуется composer, с подключенным **vendor/autoload.php**
