@@ -1,5 +1,11 @@
 {
 	"conf": "\\angelcharly\\weather\\Weather",
-	"city_id" : 27890,
-	"count" : 5
+	"tester": "tester.php",
+	"city": "Tolyatti",
+	"key": "e499ab92799911d89b02ac1460f606a9",
+	"lang": {
+		"few clouds": "Местами облачно",
+		"scattered clouds": "Рассеянные облака",
+		"Tolyatti": "Тольятти"
+	}
 }

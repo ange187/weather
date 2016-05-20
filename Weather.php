@@ -2,63 +2,63 @@
 namespace angelcharly\weather;
 use infrajs\template\Template;
 use infrajs\path\Path;
-use infrajs\router\Router;
+use infrajs\cache\Cache;
+
 Class Weather {
 	public static $conf = array(
-		'city_id' => 27890,
-		'count' => 5
+
+		'city' => 'Tolyatti',
+		'key' => 'e499ab92799911d89b02ac1460f606a9',
+		'lang' => array(
+			'few clouds' => 'Местами облачно',
+			'scattered clouds' => 'Рассеянные облака',
+			'Tolyatti' => 'Тольятти'
+		)
 	);
+	public static function load($src)
+	{
+		$mark = date("d F Y h");
+
+		$data = Cache::exec(array(), __FILE__, function ($src) {
+			$data = file_get_contents($src.'&units=metric&appid='.Weather::$conf['key']);
+			$data = json_decode($data, true);
+			return $data;
+		}, array($src, $mark), isset($_GET['re']));
+		return $data;
+	}
+
+	public static function lang($str)
+	{
+		if (isset(Weather::$conf['lang'][$str])) return Weather::$conf['lang'][$str];
+		return $str;
+	}
+	public static function getData()
+	{
+		$src = 'http://api.openweathermap.org/data/2.5/weather?q='.Weather::$conf['city'];
+		$data = Weather::load($src);
+		$forecast = array(
+			'city' => Weather::lang($data['name']),
+			'icon' => 'http://openweathermap.org/img/w/'.$data['weather'][0]['icon'].'.png',
+			'descr' => Weather::lang($data['weather'][0]['description']),
+			'temp' => $data['main']['temp'].' °C',
+			'clouds' => $data['clouds']['all'].'%',	
+			'wind' => $data['wind']['speed'].' м/с',
+			'id' => $data['id']
+		);
+		//echo '<pre>';
+		//print_r($data);
+		//exit;
+		return $forecast;
+	}
+
 	public static function getHtml()
 	{
-		Router::init();
-		$conf = Weather::$conf;
-		$id = $conf['city_id'];
-		$forecast = Weather::getData($id);
+		$forecast = Weather::getData();
 		$src = '-weather/weather.html';
-		if (!Path::theme($src)) {
-			throw new \Exception('Не найден шаблон '.$src);
-		}
+		if (!Path::theme($src)) throw new \Exception('Не найден шаблон '.$src);
 		$html = Template::parse($src, $forecast);
 		return $html;
 	}
 
-	public static function getData($city_id) 
-	{
-		$data_file = 'http://export.yandex.ru/weather-ng/forecasts/'.$city_id.'.xml'; // адрес xml файла 
-		$count = 0;
-
-		$conf = Weather::$conf;
-		$stop_count = $conf['count'];
-		
-		do {
-			$xml = @simplexml_load_file($data_file);
-			$count = $count + 1;
-			if ($count > $stop_count){
-				echo 'попробуй еще раз. Было попыток:'.$count;
-				return;
-			}
-
-		} while ($xml === false);
-
-		
-		$attr = $xml->attributes();
-		$city = (string) $attr['city'];
-
-		$temp = (int) $xml->fact->temperature;
-		$pic = (string) $xml->fact->image;
-		$type = (string) $xml->fact->weather_type;
-
-
-		if ($temp > 0) {// Если значение температуры положительно, для наглядности добавляем "+"
-			$temp = '+'.$temp;
-		}
-
-		$data = array(
-			'city' => $city ,// город
-			'pic' => $pic, // картинка
-			'temp' => $temp, // температура
-			'type' => $type, 
-		);
-		return $data;
-	}
+	
 }

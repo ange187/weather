@@ -1,6 +1,8 @@
 # Погода
+
 ## Demo
 [Пример как выглядит](http://white-phoenix.tk/programming.php)
+
 ## Установка
 Установка через composer.
 ```json
@@ -10,6 +12,7 @@
   }
 }
 ```
+
 ## Использование
 ```php
   $html = \angelcharly\weather\Weather::getHtml();
@@ -19,11 +22,16 @@
 ```json
 {
 	"weather":{
-		"city_id":36079,
-		"count":6
+		"city":"Tolyatti",
+		"key": "там",
 	}
 }
 ```
-Код города city_id можно посмотреть [тут](https://pogoda.yandex.ru/static/cities.xml)
+На сайте [openweathermap.org](http://openweathermap.org/) можно посмотреть city и key.
+
 ## Требование
 Требуется php от 5.4. Требуется composer, с подключенным **vendor/autoload.php**
+
+## Тестирование
+Откройте в браузере /vendor/angelcharly/weather/tester.php
+

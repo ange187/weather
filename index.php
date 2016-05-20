@@ -8,6 +8,6 @@ if (!is_file('vendor/autoload.php')) {
 	Router::init();
 }
 
-$html = Weather::getHtml();
+$data = Weather::getHtml();
 
-echo $html;
+print_r ($data);

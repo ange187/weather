@@ -1,5 +1,7 @@
 {root:}
 	<div style="background-color:white; padding:5px; color:black;">
-		<a style="color:black" href="http://pogoda.yandex.ru/27890/">{city}</a>
-		<img src="http://img.yandex.net/i/{pic}.png" alt="{type}" title="{type}">{temp}<sup>o</sup>C
+		<a style="color:black" href="http://openweathermap.org/city/{id}">{city}</a>
+		<img src="{icon}" title="{descr}">{temp} <br>
+		Скорость ветра: {wind} <br>
+		Облочность: {clouds}
 	</div>
