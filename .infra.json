@@ -1,6 +1,7 @@
 {
 	"conf": "\\angelcharly\\weather\\Weather",
 	"tester": "tester.php",
+	"dependencies":"router",
 	"city": "Tolyatti",
 	"key": "e499ab92799911d89b02ac1460f606a9",
 	"lang": {
