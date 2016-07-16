@@ -1,7 +1,7 @@
 # Погода
 
 ## Demo
-[Пример как выглядит](http://white-phoenix.tk/programming.php)
+[Пример как выглядит](http://white-phoenix.890m.com/programming.php)
 
 ## Установка
 Установка через composer.
